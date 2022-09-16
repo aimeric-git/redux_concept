@@ -1,5 +1,7 @@
 import React from 'react';
 import {buyPhone} from '../redux/phone/actionPhone';
+import { connect } from "react-redux";
+
 // import { useSelector, useDispatch } from 'react-redux';
 
 // const PhoneComponent = () => {
@@ -18,10 +20,8 @@ import {buyPhone} from '../redux/phone/actionPhone';
 // export default PhoneComponent;
 
 // utilisation de mapStateToPRops et mapDispatchToProps
-import { connect } from "react-redux";
 
 const PhoneComponent = (props) => {
-  console.log(props);
 
   const handleClick = () => {
     props.buyPhone();
@@ -37,9 +37,9 @@ const PhoneComponent = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
-    phones: state.phones,
+    phones: state.phone.phones,
   };
 };
 
