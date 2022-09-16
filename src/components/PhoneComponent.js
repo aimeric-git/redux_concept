@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {buyPhone} from '../redux/phone/actionPhone';
 import { connect } from "react-redux";
 
@@ -23,8 +23,10 @@ import { connect } from "react-redux";
 
 const PhoneComponent = (props) => {
 
+  const [totalPhone, setTotalPhone] = useState(1);
+
   const handleClick = () => {
-    props.buyPhone();
+    props.buyPhone(totalPhone);
   }
 
   return (
@@ -32,7 +34,13 @@ const PhoneComponent = (props) => {
       <p>
         Nombre de téléphone: <span>{props.phones}</span>
       </p>
-      <button onClick={handleClick}>Acheter</button>
+      <div>
+        <input type="text"
+          value={totalPhone}
+          onChange={(e) => setTotalPhone(e.target.value)} 
+        />
+        <button onClick={handleClick}>Acheter</button>
+      </div>
     </div>
   );
 };
@@ -45,7 +53,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    buyPhone: () => dispatch(buyPhone()),
+    buyPhone: (totalPhone) => dispatch(buyPhone(totalPhone)),
   };
 };
 
